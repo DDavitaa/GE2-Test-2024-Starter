@@ -19,6 +19,7 @@ var creatureHead_scene = load("res://behaviors/creature_head.tscn")
 var creatureBody_scene = load("res://behaviors/creature_body.tscn")
 var length_distance:float = 2
 
+var cubes_array = []
 
 func _process(delta):
 	DebugDraw3D.draw_sphere(global_position,1,Color.HOT_PINK,2.0)
@@ -28,26 +29,48 @@ func _process(delta):
 		remove_child(get_node("creatureHead"))
 		remove_child(get_node("creatureBody"))
 		length_distance = 0.0
-		create_creature()
+		cubes_array = []
+		
 		old_length = length
+		old_start_angle = start_angle
+		old_frequency = frequency
+		old_base_size = base_size
+		old_multiplier = multiplier
+		
+		create_creature()
 		
 	
-func create_creature():
-	var creatureHead_instance = creatureHead_scene.instantiate()
-	creatureHead_instance.global_position.x = length_distance
-	length_distance += creatureHead_instance.size.x
-	add_child(creatureHead_instance)
+	#print(lerp(sin(10),10.0,frequency))
 	
+	
+func create_creature():
+	var n = sin(frequency)
+	
+	
+	var creatureHead_instance = creatureHead_scene.instantiate()
 	var creatureBody_instance = creatureBody_scene.instantiate()
+	cubes_array.append(creatureHead_instance)
 	
 	for i in length:
 		var cube_instance = CSGBox3D.new()
-		cube_instance.position.x = length_distance
-		length_distance += cube_instance.size.x
+		#cube_instance.position.x = length_distance
+		#length_distance += cube_instance.size.x
 		creatureBody_instance.add_child(cube_instance)
+		cubes_array.append(creatureBody_instance)
 	
-	add_child(creatureBody_instance)
+	for i in cubes_array:
+		cubes_array[i].size.x = lerp(frequency,5.0,sin(frequency))
 		
+	
+	creatureHead_instance.global_position.x = length_distance
+	length_distance += creatureHead_instance.size.x
+	
+
+	
+	
+	add_child(creatureHead_instance)
+	add_child(creatureBody_instance)
+	
 	
 
 func _ready():
