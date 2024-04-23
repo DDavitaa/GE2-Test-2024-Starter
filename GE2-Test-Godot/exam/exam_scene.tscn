@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://b26ra08yh7e5m"]
+[gd_scene load_steps=8 format=3 uid="uid://b26ra08yh7e5m"]
 
 [ext_resource type="Script" path="res://behaviors/root.gd" id="1_prfgg"]
 [ext_resource type="Script" path="res://behaviors/creature_generator.gd" id="2_uyo6r"]
@@ -7,6 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://dc24oh4o5erhi" path="res://behaviors/SceneSwitcher.tscn" id="7_ybx0x"]
 
 [sub_resource type="SphereShape3D" id="18"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_1dxuv"]
 
 [node name="exam" type="Node3D"]
 script = ExtResource("1_prfgg")
@@ -37,3 +39,8 @@ transform = Transform3D(0.646177, 0.763187, 2.01452e-08, 6.97809e-09, -3.23043e-
 light_volumetric_fog_energy = 0.0
 
 [node name="SceneSwitcher" parent="." instance=ExtResource("7_ybx0x")]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.075, 0, 0, 0, 1.075, 0, 0, 0, 1.075, 0, 0, 0)
+visible = false
+mesh = SubResource("BoxMesh_1dxuv")
