@@ -1,3 +1,6 @@
-[gd_scene format=3 uid="uid://cg8osvcibpygd"]
+[gd_scene load_steps=2 format=3 uid="uid://cg8osvcibpygd"]
+
+[ext_resource type="Script" path="res://creature_body.gd" id="1_66p02"]
 
 [node name="creatureBody" type="Node3D"]
+script = ExtResource("1_66p02")
